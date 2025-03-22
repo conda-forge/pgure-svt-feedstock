@@ -1,0 +1,39 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e897e69..9664dd0 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -68,7 +68,11 @@ endif()
+ # Enable OpenMP & std::thread
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -O3 -march=native")
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -std=c++17")
+-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter")
++if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
++	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
++else ()
++	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter"")
++endif ()
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DARMA_DONT_USE_WRAPPER")
+ 
+ if (OPENMP_FOUND AND USE_OPENMP)
+diff --git a/setup.py b/setup.py
+index 676beb6..09937ae 100644
+--- a/setup.py
++++ b/setup.py
+@@ -14,15 +14,7 @@ extensions = [
+         libraries=["openblas", "lapack", "armadillo", "nlopt"],
+         language="c++",
+         extra_compile_args=[
+-            "-fPIC",
+-            "-O3",
+-            "-march=native",
+-            "-pthread",
+-            "-std=c++17",
+-            "-Wall",
+-            "-Wextra",
+-            "-Wno-unused-parameter",
+-            "-Wno-unused-function",
++            "/std:c++17",
+             "-D NPY_NO_DEPRECATED_API",
+         ],
+     ),
+

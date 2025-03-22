@@ -9,12 +9,12 @@ source:
   url: https://github.com/tjof2/{{ name }}/archive/v{{ version }}.tar.gz
   sha256: 9ef8a8b6e2fe9ffdb28042f5ae1a9055a722fcce53a4cc132ba0c772de2d6d75
   patches:
-    - march.patch
+    - march.patch  # [not win]
+    - 0001-Fix-flags-for-MSVC.patch  # [win]
 
 build:
-  number: 9
-  script: {{ PYTHON }} -m pip install . -vv
-  skip: true  # [win]
+  number: 10
+  script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   build:
