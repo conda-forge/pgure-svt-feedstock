@@ -12,7 +12,7 @@ source:
     - march.patch
 
 build:
-  number: 9
+  number: 10
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [win]
 
