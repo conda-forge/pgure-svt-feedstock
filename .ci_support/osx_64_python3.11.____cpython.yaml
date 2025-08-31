@@ -13,7 +13,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '18'
+- '19'
 liblapack:
 - 3.9.* *netlib
 macos_machine:
@@ -21,7 +21,7 @@ macos_machine:
 nlopt:
 - '2.10'
 numpy:
-- '2.0'
+- '2'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -32,4 +32,4 @@ target_platform:
 - osx-64
 zip_keys:
 - - python
-  - numpy
+  - channel_sources
